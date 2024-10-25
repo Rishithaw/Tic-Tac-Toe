@@ -11,7 +11,7 @@ public class AiPlayer extends Player {
         board.updateMove(bestMove[0], bestMove[1], Piece.O);
     }
 
-    // Public method for AI to make its move
+     //Public method for AI to make its move
     private int[] findBestMove() {
         int bestScore = Integer.MIN_VALUE;
         int[] move = new int[2]; // Store the best move

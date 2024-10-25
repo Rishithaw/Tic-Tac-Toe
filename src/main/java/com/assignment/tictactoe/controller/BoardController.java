@@ -7,19 +7,15 @@ import com.assignment.tictactoe.service.Piece;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
 
-public class BoardController implements BoardUI/*, Initializable*/ {
+public class BoardController implements BoardUI {
 
     @FXML
     private AnchorPane ancPane;
@@ -106,7 +102,6 @@ public class BoardController implements BoardUI/*, Initializable*/ {
         if (buttonToUpdate != null) {
             buttonToUpdate.setText(isHuman ? Piece.X.toString() : Piece.O.toString());
             buttonToUpdate.setDisable(true); // Disable button after it's clicked
-            //buttonToUpdate.setFocusTraversable(false);
         }
     }
 
@@ -145,17 +140,15 @@ public class BoardController implements BoardUI/*, Initializable*/ {
     }
 
     private int getRow(Button button) {
-        if (button == btn00 || button == btn01 || button == btn02) return 0;
-        if (button == btn10 || button == btn11 || button == btn12) return 1;
-        if (button == btn20 || button == btn21 || button == btn22) return 2;
-        return -1; // Error case
+        return (button == btn00 || button == btn01 || button == btn02) ? 0 :
+               (button == btn10 || button == btn11 || button == btn12) ? 1 :
+               (button == btn20 || button == btn21 || button == btn22) ? 2 : -1; // Error case
     }
 
     private int getCol(Button button) {
-        if (button == btn00 || button == btn10 || button == btn20) return 0;
-        if (button == btn01 || button == btn11 || button == btn21) return 1;
-        if (button == btn02 || button == btn12 || button == btn22) return 2;
-        return -1; // Error case
+        return (button == btn00 || button == btn10 || button == btn20) ? 0 :
+               (button == btn01 || button == btn11 || button == btn21) ? 1 :
+               (button == btn02 || button == btn12 || button == btn22) ? 2 : -1; // Error case
     }
 
     private void disableButtons() {
@@ -165,37 +158,15 @@ public class BoardController implements BoardUI/*, Initializable*/ {
     }
 
     private Button getButtonByPosition(int row, int col) {
-        switch (row) {
-            case 0:
-                switch (col) {
-                    case 0: return btn00;
-                    case 1: return btn01;
-                    case 2: return btn02;
-                }
-                break;
-            case 1:
-                switch (col) {
-                    case 0: return btn10;
-                    case 1: return btn11;
-                    case 2: return btn12;
-                }
-                break;
-            case 2:
-                switch (col) {
-                    case 0: return btn20;
-                    case 1: return btn21;
-                    case 2: return btn22;
-                }
-                break;
+        Button[][] buttons = {
+                {btn00, btn01, btn02},
+                {btn10, btn11, btn12},
+                {btn20, btn21, btn22}
+        };
+
+        if (row >= 0 && row < buttons.length && col >= 0 && col < buttons[row].length) {
+            return buttons[row][col];
         }
         return null; // If no button is found
     }
-
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        ArrayList<Button> buttons = new ArrayList<>(Arrays.asList(btn00,btn01,btn02,btn10,btn11,btn12,btn20,btn21,btn22));
-//        for (Button button : buttons) {
-//            button.setFocusTraversable(false);
-//        }
-//    }
 }

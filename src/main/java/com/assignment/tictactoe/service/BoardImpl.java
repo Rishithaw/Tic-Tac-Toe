@@ -2,15 +2,9 @@ package com.assignment.tictactoe.service;
 
 public class BoardImpl implements Board {
     Piece[][] pieces = new Piece[3][3]; // 3x3 gird in which the game is played
-    BoardUI boardUI;
 
     public BoardImpl() {
         initializeBoard(); // Initialize the game board
-    }
-
-    @Override
-    public BoardUI getBoardUI() {
-        return boardUI;
     }
 
     @Override
