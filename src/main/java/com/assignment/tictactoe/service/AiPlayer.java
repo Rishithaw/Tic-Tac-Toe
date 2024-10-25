@@ -9,6 +9,7 @@ public class AiPlayer extends Player {
     public void move(int row, int col) {
         int[] bestMove = findBestMove();
         board.updateMove(bestMove[0], bestMove[1], Piece.O);
+        System.out.println();
     }
 
      //Public method for AI to make its move
