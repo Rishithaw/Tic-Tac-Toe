@@ -77,6 +77,7 @@ public class BoardController implements BoardUI {
             updateUi();
 
             Piece winner = board.checkWinner() != null ? board.checkWinner().getWinningPiece() : null;
+
             if (winner != null) {
                 NotifyWinner(winner);
             } else if (board.isFull()) {
